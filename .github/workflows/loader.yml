@@ -1,0 +1,27 @@
+name: Kino Import
+on:
+  schedule:
+    - cron:  '*/5 * * * *'   # la fiecare 5 minute (UTC)
+  workflow_dispatch:
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install psycopg2-binary requests beautifulsoup4 python-dotenv
+
+      - name: Run import script
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DSN }}
+        run: python kino_import.py
