@@ -1,7 +1,7 @@
 name: Kino Import
 on:
   schedule:
-    - cron:  '*/5 * * * *'   # la fiecare 5 minute (UTC)
+    - cron:  '*/1 * * * *'   # la fiecare 1 minute (UTC)
   workflow_dispatch:
 
 jobs:
